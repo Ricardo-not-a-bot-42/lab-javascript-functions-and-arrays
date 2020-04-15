@@ -1,18 +1,136 @@
 // Iteration #1: Find the maximum
+let maxOfTwoNumbers = (a, b) => {
+  if(a > b){
+    return a;
+  } else if(a < b){
+    return b;
+  } else {
+    return a;
+  }
+}
 
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
+
+let findLongestWord = (words) => {
+  let longestWord = "";
+  if(words.length === 0){
+    return null;
+  }
+  if(words.length === 1){
+    return words[0];
+  }
+  for(let word of words){
+    if(word.length > longestWord.length){
+      longestWord = word;
+    }
+  }
+  return longestWord;
+}
 
 // Iteration #3: Calculate the sum
 
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
+let sumNumbers = (numbers) => {
+  let sum = 0;
+  if(numbers.length === 0){
+    return 0;
+  }
+  if(numbers.length === 1){
+    return numbers[0];
+  }
+  for(let number of numbers){
+    sum += number;
+  }
+  return sum;
+}
+
+//Iteration 3.1 Bonus
+
+let sum = (array) => {
+  let sum = 0;
+  if(array.length === 0){
+    return 0;
+  }
+  for(value of array){
+    switch(typeof(value)){
+      case 'string' :
+        sum += value.length;
+        break;
+      case 'number' :
+        sum += value;
+        break;
+      case 'boolean' :
+        if(value){
+          sum += 1;
+        };
+        break;
+      default :
+        throw new Error("Unsupported data type sir or ma'am");
+    }
+  }
+  return sum;
+}
+
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
+let averageNumbers = (numbers) => {
+  if(numbers.length === 0){
+    return null;
+  } else if(numbers.length === 1){
+    return numbers[0];
+  } else {
+    return (sumNumbers(numbers) / numbers.length);
+  }
+
+}
+
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
+
+let averageWordLength = (words) => {
+  let wordLengthSum = 0;
+  if(words.length === 0){
+    return null;
+  }
+  if(words.length === 1){
+    return words[0].length;
+  }
+  for(let word of words){
+    wordLengthSum += word.length;
+  }
+  return(wordLengthSum / words.length);
+}
+
+//Iteration 4.1 Bonus
+
+let avg = (array) => {
+  let sum = 0;
+  if(array.length === 0){
+    return null;
+  }
+  for(value of array){
+    switch(typeof(value)){
+      case 'string' :
+        sum += value.length;
+        break;
+      case 'number' :
+        sum += value;
+        break;
+      case 'boolean' :
+        if(value){
+          sum += 1;
+        };
+        break;
+      default :
+        throw new Error("Unsupported data type sir or ma'am");
+    }
+  }
+  return +(sum / array.length).toFixed(2);
+}
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
@@ -29,8 +147,34 @@ const wordsUnique = [
   'bring'
 ];
 
+let uniquifyArray = (words) =>{
+  let uniquifiedArray = [];
+  if(words.length === 0){
+    return null;
+  }
+  for(let i = 0; i < words.length; i++){
+    if(words.indexOf(words[i]) !== i){
+      words.splice(i, 1);
+      i--;
+    } 
+  }
+  return words;
+}
+
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
+
+let doesWordExist = (words, wordToSearch) => {
+  if(words.length === 0 || wordToSearch.length === 0){
+    return null;
+  }
+  for(let word of words){
+    if(word === wordToSearch){
+      return true;
+    }
+  }
+  return false;
+}
 
 // Iteration #7: Count repetition
 const wordsCount = [
@@ -46,6 +190,19 @@ const wordsCount = [
   'disobedience',
   'matter'
 ];
+
+let howManyTimes = (words, wordToSearch) => {
+  let wordTimes = 0;
+  if(words.length === 0 || wordToSearch.length === 0){
+    return 0;
+  }
+  for(word of words){
+    if(word === wordToSearch){
+      wordTimes++;
+    }
+  }
+  return wordTimes;
+}
 
 // Iteration #8: Bonus
 
@@ -71,3 +228,26 @@ const matrix = [
   [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+
+let greatestProduct = (matrix) => {
+  let greatestNumber = 0;
+  let sum = 0;
+  for(let row of matrix){
+    for(let k = 0; k < row.length - 3; k++){
+      sum = row[k] * row[k + 1] * row[k + 2] * row[k + 3];
+      if(sum > greatestNumber){
+        greatestNumber = sum;
+      }
+    }
+    
+  }
+  for(let column = 0; column < matrix[0].length; column++){
+    for(let j = 0; j < matrix.length - 3; j++){
+      sum = matrix[j][column] * matrix[j + 1][column] * matrix[j + 2][column] * matrix[j + 3][column];
+      if(sum > greatestNumber){
+        greatestNumber = sum;
+      }
+    }
+  }
+  return greatestNumber;
+}
